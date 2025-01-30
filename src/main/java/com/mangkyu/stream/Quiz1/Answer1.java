@@ -15,6 +15,11 @@ public class Answer1 {
     private static final String TARGET = "좋아";
     private static final int TARGET_LENGTH = TARGET.length();
 
+    /**
+     * map을 통해 각 행의 1열에 대한 공백 제거
+     * flatMap을 통해 1열의 문자열을 split으로 분리한걸 문자열 스트림으로 변환
+     * Collectors.toMap을 통해 Map으로 변환하는데 취미 이름을 키로 두고 같은 취미가 발견되면 +1을 계속해서 카운팅함
+     */
     public Map<String, Integer> quiz1() throws IOException, CsvException {
         // https://jeong-pro.tistory.com/212
         List<String[]> csvLines = readCsvLines();
