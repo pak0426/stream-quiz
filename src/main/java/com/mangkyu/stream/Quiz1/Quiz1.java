@@ -3,6 +3,7 @@ package com.mangkyu.stream.Quiz1;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
+import javax.naming.PartialResultException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -57,7 +58,22 @@ public class Quiz1 {
     // 1.3 소개 내용에 '좋아'가 몇번 등장하는지 계산하여라.
     public int quiz3() throws IOException, CsvException {
         List<String[]> csvLines = readCsvLines();
-        return 0;
+
+        int result = csvLines.stream()
+                .mapToInt(arr -> {
+                    String intro = arr[2];
+                    int count = 0;
+                    int index = 0;
+
+                    while ((index = intro.indexOf("좋아", index)) != -1) {
+                        count++;
+                        index += 2;
+                    }
+                    return count;
+                })
+                .sum();
+
+        return result;
     }
 
     private List<String[]> readCsvLines() throws IOException, CsvException {
