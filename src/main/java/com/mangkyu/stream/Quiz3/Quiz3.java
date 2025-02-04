@@ -12,7 +12,10 @@ public class Quiz3 {
     // 3.1 모든 숫자 쌍의 배열 리스트를 반환하여라.
     // ex) numbers1 = [1,2,3], numbers2 = [3,4] -> [(1,3), (1,4), (2,3), (2,4), (3,3), (3,4)]
     public List<Integer[]> quiz1() {
-        return Collections.emptyList();
+        List<Integer[]> result = numbers1.stream()
+                .flatMap(num -> numbers2.stream().map(num2 -> new Integer[]{num, num2}))
+                .toList();
+        return result;
     }
 
     // 3.2 모든 숫자 쌍의 곱이 가장 큰 값을 반환하여라.
