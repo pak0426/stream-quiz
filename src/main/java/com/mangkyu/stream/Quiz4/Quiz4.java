@@ -38,7 +38,11 @@ public class Quiz4 {
 
     // 4.2 거래 내역이 있는 거래자가 근무하는 모든 도시를 중복 없이 나열하라.
     public List<String> quiz2() {
-        return Collections.emptyList();
+        List<String> result = transactions.stream()
+                .map(t -> t.getTrader().getCity())
+                .distinct()
+                .toList();
+        return result;
     }
 
     // 4.3 서울에서 근무하는 모든 거래자를 찾아서 이름순서대로 정렬하라.
