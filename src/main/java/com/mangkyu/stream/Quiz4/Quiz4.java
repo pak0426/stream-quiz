@@ -47,7 +47,13 @@ public class Quiz4 {
 
     // 4.3 서울에서 근무하는 모든 거래자를 찾아서 이름순서대로 정렬하라.
     public List<Trader> quiz3() {
-        return Collections.emptyList();
+        List<Trader> result = transactions.stream()
+                .filter(t -> t.getTrader().getCity().equals("Seoul"))
+                .map(Transaction::getTrader)
+                .distinct()
+                .sorted(Comparator.comparing(Trader::getName))
+                .toList();
+        return result;
     }
 
     // 4.4 모든 거래자의 이름을 구분자(",")로 구분하여 정렬하라.
