@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Quiz4 {
 
@@ -48,9 +49,9 @@ public class Quiz4 {
     // 4.3 서울에서 근무하는 모든 거래자를 찾아서 이름순서대로 정렬하라.
     public List<Trader> quiz3() {
         List<Trader> result = transactions.stream()
-                .filter(t -> t.getTrader().getCity().equals("Seoul"))
-                .map(Transaction::getTrader)
                 .distinct()
+                .map(Transaction::getTrader)
+                .filter(t -> t.getCity().equals("Seoul"))
                 .sorted(Comparator.comparing(Trader::getName))
                 .toList();
         return result;
@@ -58,7 +59,13 @@ public class Quiz4 {
 
     // 4.4 모든 거래자의 이름을 구분자(",")로 구분하여 정렬하라.
     public String quiz4() {
-        return null;
+        String result = transactions.stream()
+                .map(t -> t.getTrader().getName())
+                .distinct()
+                .sorted()
+                .collect(Collectors.joining(","));
+
+        return result;
     }
 
     // 4.5 부산에 거래자가 있는지를 확인하라.
