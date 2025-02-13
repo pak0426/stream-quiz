@@ -49,8 +49,8 @@ public class Quiz4 {
     // 4.3 서울에서 근무하는 모든 거래자를 찾아서 이름순서대로 정렬하라.
     public List<Trader> quiz3() {
         List<Trader> result = transactions.stream()
-                .distinct()
                 .map(Transaction::getTrader)
+                .distinct()
                 .filter(t -> t.getCity().equals("Seoul"))
                 .sorted(Comparator.comparing(Trader::getName))
                 .toList();
@@ -83,7 +83,11 @@ public class Quiz4 {
 
     // 4.6 서울에 거주하는 거래자의 모든 거래 금액을 구하라.
     public List<Integer> quiz6() {
-        return Collections.emptyList();
+        List<Integer> result = transactions.stream()
+                .filter(t -> t.getTrader().getCity().equals("Seoul"))
+                .map(Transaction::getValue)
+                .toList();
+        return result;
     }
 
     // 4.7 모든 거래 내역중에서 거래 금액의 최댓값과 최솟값을 구하라. 단, 최댓값은 reduce를 이용하고 최솟값은 stream의 min()을 이용하라.
