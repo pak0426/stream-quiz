@@ -18,7 +18,10 @@ public class Quiz5 {
 
     // 5.2 문자열 중에서 가장 긴 것의 길이를 출력하시오.
     public int quiz2() {
-        return 0;
+        int result = Arrays.stream(STRING_ARR)
+                .mapToInt(String::length)
+                .reduce(Integer.MIN_VALUE, Math::max);
+        return result;
     }
 
     // 5.3 임의의 로또번호(1~45)를 정렬해서 출력하시오.
