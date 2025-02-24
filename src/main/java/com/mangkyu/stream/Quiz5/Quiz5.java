@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Quiz5 {
 
@@ -39,7 +40,15 @@ public class Quiz5 {
 
     // 5.4 두 개의 주사위를 굴려서 나온 눈의 합이 6인 경우를 모두 출력하시오.
     public List<Integer[]> quiz4() {
-        return Collections.emptyList();
+        List<Integer[]> result = IntStream.rangeClosed(1, 6)
+                .boxed()
+                .flatMap(i -> IntStream.rangeClosed(1, 6)
+                        .filter(j -> i + j == 6)
+                        .mapToObj(j -> new Integer[]{i, j})
+                )
+                .toList();
+
+        return result;
     }
 
 }
