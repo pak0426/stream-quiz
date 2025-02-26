@@ -40,7 +40,13 @@ public class Quiz6 {
 
     // 각 반별 총점을 학년 별로 나누어 구하여라 (Map<Integer, Map<Integer, Integer>>)
     public Map<Integer, Map<Integer, Integer>> quiz2() {
-        return new HashMap<>();
+        Map<Integer, Map<Integer, Integer>> result = Arrays.stream(stuArr)
+                .collect(Collectors.groupingBy(Student::getHak,
+                                Collectors.groupingBy(Student::getBan,
+                                        Collectors.summingInt(Student::getScore))
+                        )
+                );
+        return result;
     }
 
 }
